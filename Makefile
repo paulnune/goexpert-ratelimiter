@@ -2,7 +2,7 @@
 
 # Targets principais
 
-all: up sleep install-lynx sleep read-files
+all: up install-lynx sleep read-files
 
 up:
 	@echo "📦 Starting services with Docker Compose..."
@@ -17,7 +17,6 @@ down:
 restart:
 	@echo "🔄 Restarting services with Docker Compose..."
 	@make down
-	@make sleep
 	@make up
 	@echo "✅ Services restarted."
 
@@ -45,15 +44,14 @@ install-lynx:
 	@echo "✅ Lynx instalado."
 
 read-files:
-	@make sleep
 	@echo "📖 Lendo arquivos HTML com lynx..."
 	@lynx -dump stress/summary-ip.html
 	@lynx -dump stress/summary-token.html
 	@echo "✅ Leitura concluída."
 
 sleep:
-	@echo "⏳ Aguardando 20 segundos..."
-	@sleep 20
+	@echo "⏳ Aguardando 50 segundos..."
+	@sleep 50
 	@echo "⏳ Tempo de espera concluído."
 
 .PHONY: all up down restart help install-lynx read-files sleep
