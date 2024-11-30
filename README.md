@@ -9,42 +9,50 @@ Projeto desenvolvido em Go para implementar um rate limiter configurável, permi
 - Configuração de limites de requisições por segundo e tempo de bloqueio.
 - Middleware injetável para fácil integração com servidores web.
 - Configuração via variáveis de ambiente ou arquivo `.env`.
-  **Nota**: Para validar a entrega, deixei preenchido o arquivo `.env`.
+  **Nota**: O arquivo `.env` já está preenchido com valores padrão para facilitar a validação.
 - Armazenamento de dados em Redis com suporte para troca de storage via "strategy".
 - Respostas HTTP 429 quando o limite é excedido, com mensagem clara ao usuário.
 
-## Requisitos 📦
+---
 
-- Docker ou Podman com suporte ao Docker Compose ou Podman Compose.
-- `lynx` para leitura de relatórios em HTML.
+## Configuração do `.env`
+
+### Parâmetros
+
+- `RATELIMIT`: Limite de requisições por IP (ex.: `10`).
+- `RATELIMIT_CLEANUP_INTERVAL`: Intervalo de limpeza de dados antigos em milissegundos (ex.: `1000`).
+- `RATELIMIT_BLOCK_TIME`: Tempo de bloqueio ao exceder os limites (em milissegundos, ex.: `30000`).
+- `TOKEN_LIST`: Limites específicos para tokens no formato `20,50,100,...`.
+
+**Exemplo de uso do Token:**
+O cabeçalho deve incluir:
+```
+API_KEY: <TOKEN>
+```
+- Caso o token seja válido, o limite configurado em `TOKEN_LIST` será utilizado e terá prioridade sobre o limite de IP.
+
+---
+
+## Prioridade do Token sobre o IP
+
+O rate limiter verifica primeiramente se um token foi enviado no cabeçalho `API_KEY`. Caso um token válido esteja presente e tenha um limite configurado em `TOKEN_LIST`, as requisições serão limitadas com base no token. Se o token não estiver presente ou não for válido, o limite será aplicado com base no endereço IP.
+
+---
 
 ## Como executar 🚀
 
 ### Execução Completa
 
-Para executar todo o processo, desde iniciar os serviços até exibir os relatórios de validação, utilize o comando:
+Para executar todo o processo, utilize o comando:
 ```bash
 make all
 ```
 
 Esse comando executa:
 1. Subida dos serviços com `make up`.
-2. Aguardar inicialização (inclui o comando `sleep` para assegurar que os serviços estejam prontos).
-3. Instalação do `lynx` para leitura dos relatórios.
-4. Leitura dos relatórios com `make read-files`.
-
----
-
-## Exemplos de Uso 🛠️
-
-### Limitação por IP
-Um cliente com o IP `192.168.1.1` que exceder o limite configurado de 10 requisições por segundo receberá uma resposta com:
-
-- **Código HTTP**: 429
-- **Mensagem**: "You have reached the maximum number of requests or actions allowed within a certain time frame."
-
-### Limitação por Token
-Se um token `abc123` tiver um limite configurado de 100 requisições por segundo e exceder esse valor, o token será bloqueado conforme o tempo configurado.
+2. Inicialização com tempo de espera.
+3. Instalação do `lynx` para leitura de relatórios.
+4. Visualização dos resultados com `make read-files`.
 
 ---
 
