@@ -4,7 +4,7 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/paulnune/goexpert-ratelimiterinternal/usecase"
+	"github.com/paulnune/goexpert-ratelimiter/internal/usecase"
 )
 
 // rateLimitMiddleware applies rate limiting to incoming requests

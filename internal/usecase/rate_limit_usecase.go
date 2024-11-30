@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/paulnune/goexpert-ratelimiterinternal/database"
+	"github.com/paulnune/goexpert-ratelimiter/internal/database"
 )
 
 // RateLimiter struct to hold rate limiting data

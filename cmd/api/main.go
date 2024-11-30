@@ -8,10 +8,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/paulnune/goexpert-ratelimiterinternal/database"
-	"github.com/paulnune/goexpert-ratelimiterinternal/usecase"
-	"github.com/paulnune/goexpert-ratelimiterinternal/web/handler"
-	"github.com/paulnune/goexpert-ratelimiterinternal/web/middleware"
+	"github.com/paulnune/goexpert-ratelimiter/internal/database"
+	"github.com/paulnune/goexpert-ratelimiter/internal/usecase"
+	"github.com/paulnune/goexpert-ratelimiter/internal/web/handler"
+	"github.com/paulnune/goexpert-ratelimiter/internal/web/middleware"
 )
 
 func main() {
