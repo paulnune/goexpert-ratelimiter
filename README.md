@@ -35,6 +35,19 @@ Esse comando executa:
 
 ---
 
+## Exemplos de Uso 🛠️
+
+### Limitação por IP
+Um cliente com o IP `192.168.1.1` que exceder o limite configurado de 10 requisições por segundo receberá uma resposta com:
+
+- **Código HTTP**: 429
+- **Mensagem**: "You have reached the maximum number of requests or actions allowed within a certain time frame."
+
+### Limitação por Token
+Se um token `abc123` tiver um limite configurado de 100 requisições por segundo e exceder esse valor, o token será bloqueado conforme o tempo configurado.
+
+---
+
 ### Comandos Individuais
 
 Caso prefira executar cada etapa separadamente, utilize:
@@ -69,7 +82,7 @@ make read-files
 
 ## Validação com K6 📊
 
-A validação do rate limiter é realizada automaticamente durante a execução dos containers. Os testes de estresse utilizam o K6 para gerar tráfego e validar os limites de requisições por IP e por Token.
+A validação do rate limiter é realizada automaticamente durante a execução dos containers. Os testes de estresse utilizam o K6 para gerar tráfego e validar os limites de requisições por IP e por Token. **O comando make all já realiza esses testes**.
 
 ### Relatórios de Validação
 
@@ -114,24 +127,6 @@ A validação do rate limiter é realizada automaticamente durante a execução 
 │   └── summary-token.html
 ├── .env
 └── README.md
-```
-
-## Exemplos de Uso 🛠️
-
-### Limitação por IP
-Um cliente com o IP `192.168.1.1` que exceder o limite configurado de 10 requisições por segundo receberá uma resposta com:
-
-- **Código HTTP**: 429
-- **Mensagem**: "You have reached the maximum number of requests or actions allowed within a certain time frame."
-
-### Limitação por Token
-Se um token `abc123` tiver um limite configurado de 100 requisições por segundo e exceder esse valor, o token será bloqueado conforme o tempo configurado.
-
-## Testes Automatizados 🧪
-
-Rode os testes para garantir a robustez da implementação:
-```bash
-go test ./...
 ```
 
 ---
