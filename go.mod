@@ -1,4 +1,4 @@
-module github.com/goexpert/rate-limit
+module github.com/paulnune/goexpert-ratelimiter
 
 go 1.22.5
 
