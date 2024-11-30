@@ -50,8 +50,8 @@ read-files:
 	@echo "✅ Leitura concluída."
 
 sleep:
-	@echo "⏳ Aguardando 50 segundos..."
-	@sleep 50
+	@echo "⏳ Aguardando geração de arquivos HTML para leitura com o Lynx (90 segundos)..."
+	@sleep 90
 	@echo "⏳ Tempo de espera concluído."
 
 .PHONY: all up down restart help install-lynx read-files sleep
