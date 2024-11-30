@@ -22,20 +22,24 @@ Projeto desenvolvido em Go para implementar um rate limiter configurável, permi
 - `RATELIMIT`: Limite de requisições por IP (ex.: `10`).
 - `RATELIMIT_CLEANUP_INTERVAL`: Intervalo de limpeza de dados antigos em milissegundos (ex.: `1000`).
 - `RATELIMIT_BLOCK_TIME`: Tempo de bloqueio ao exceder os limites (em milissegundos, ex.: `30000`).
-- `TOKEN_LIST`: Limites específicos para tokens no formato `20,50,100,...`.
+- `RATELIMIT_TOKEN_LIST`: Limites específicos para tokens no formato `20,50,100,...`.
+- `RATELIMIT_REDIS_URL`: URL do Redis (ex.: `redis:6379`).
+- `RATELIMIT_HOST_TARGET`: Host de destino para validação de stress (ex.: `rate-limit`).
+- `RATELIMIT_PORT_TARGET`: Porta de destino para validação de stress (ex.: `8080`).
+- `RATELIMIT_TOKEN_LIMIT_TARGET`: Limite de requisições para tokens específicos durante validação de stress (ex.: `20`).
 
 **Exemplo de uso do Token:**
 O cabeçalho deve incluir:
 ```
 API_KEY: <TOKEN>
 ```
-- Caso o token seja válido, o limite configurado em `TOKEN_LIST` será utilizado e terá prioridade sobre o limite de IP.
+- Caso o token seja válido, o limite configurado em `RATELIMIT_TOKEN_LIST` será utilizado e terá prioridade sobre o limite de IP.
 
 ---
 
 ## Prioridade do Token sobre o IP
 
-O rate limiter verifica primeiramente se um token foi enviado no cabeçalho `API_KEY`. Caso um token válido esteja presente e tenha um limite configurado em `TOKEN_LIST`, as requisições serão limitadas com base no token. Se o token não estiver presente ou não for válido, o limite será aplicado com base no endereço IP.
+O rate limiter verifica primeiramente se um token foi enviado no cabeçalho `API_KEY`. Caso um token válido esteja presente e tenha um limite configurado em `RATELIMIT_TOKEN_LIST`, as requisições serão limitadas com base no token. Se o token não estiver presente ou não for válido, o limite será aplicado com base no endereço IP.
 
 ---
 
