@@ -7,6 +7,7 @@ all: up sleep install-lynx sleep read-files
 up:
 	@echo "📦 Starting services with Docker Compose..."
 	@docker compose up -d
+	@make sleep
 	@echo "✅ Services are up."
 
 down:
@@ -43,6 +44,7 @@ install-lynx:
 		exit 1; \
 	fi
 	@echo "✅ Lynx instalado."
+	@make sleep
 
 read-files:
 	@echo "📖 Lendo arquivos HTML com lynx..."
@@ -51,8 +53,8 @@ read-files:
 	@echo "✅ Leitura concluída."
 
 sleep:
-	@echo "⏳ Aguardando 5 segundos..."
-	@sleep 5
+	@echo "⏳ Aguardando 30 segundos..."
+	@sleep 30
 	@echo "⏳ Tempo de espera concluído."
 
 .PHONY: all up down restart help install-lynx read-files sleep
