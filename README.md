@@ -131,6 +131,19 @@ A validação do rate limiter é realizada automaticamente durante a execução 
 
 ---
 
+## Validação do Desafio
+
+Todos os requisitos foram revisados:
+
+- Controle por IP e Token ✅
+- Configuração via Variáveis de Ambiente ✅
+- Resposta HTTP 429 quando excedido ✅
+- Armazenamento no Redis ✅
+- Middleware e lógica separados ✅
+- Testes automatizados com K6 ✅
+
+---
+
 ## 👨‍💻 Autor
 
 **Paulo Henrique Nunes Vanderley**  
