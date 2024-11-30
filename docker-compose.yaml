@@ -4,12 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: rate-limit
-    environment:
-      RATELIMIT: 10
-      RATELIMIT_CLEANUP_INTERVAL: 1000
-      RATELIMIT_BLOCK_TIME: 30000
-      RATELIMIT_TOKEN_LIST: 20,50,100,200,500
-      RATELIMIT_REDIS_URL: redis:6379
+    env_file:
+      - .env
     depends_on:
       - redis
     ports:
@@ -27,9 +23,8 @@ services:
     user: "1000"
     image: grafana/k6:0.48.0
     container_name: stress-ip
-    environment:
-      RATELIMIT_HOST_TARGET: rate-limit
-      RATELIMIT_PORT_TARGET: 8080
+    env_file:
+      - .env
     command: run -q --vus 1 --duration 60s --rps 25 /home/k6/stress/k6-script.js
     depends_on:
       - rate-limit
@@ -42,10 +37,8 @@ services:
     user: "1000"
     image: grafana/k6:0.48.0
     container_name: stress-token
-    environment:
-      RATELIMIT_HOST_TARGET: rate-limit
-      RATELIMIT_PORT_TARGET: 8080
-      RATELIMIT_TOKEN_LIMIT_TARGET: 20
+    env_file:
+      - .env
     command: run -q --vus 1 --duration 60s --rps 25 /home/k6/stress/k6-script-token.js
     depends_on:
       - rate-limit
